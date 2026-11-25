@@ -1,0 +1,93 @@
+{
+  "image": "valve_0000.jpg",
+  "source_folder": "10个项目_项目2_PSR15-73 四川天明_系统图_天明电厂03--精处理系统系统 - 酸碱",
+  "crop_type": "valve_centered",
+  "main_element": {
+    "simple_id": 1,
+    "category": "符号",
+    "bbox": [
+      481,
+      477,
+      544,
+      548
+    ]
+  },
+  "candidate_elements": [
+    {
+      "simple_id": 2,
+      "category": "位号",
+      "bbox": [
+        380,
+        479,
+        478,
+        546
+      ]
+    },
+    {
+      "simple_id": 3,
+      "category": "属性标签",
+      "bbox": [
+        550,
+        487,
+        570,
+        545
+      ]
+    },
+    {
+      "simple_id": 4,
+      "category": "位号",
+      "bbox": [
+        343,
+        568,
+        441,
+        635
+      ]
+    },
+    {
+      "simple_id": 5,
+      "category": "仪表",
+      "bbox": [
+        347,
+        428,
+        388,
+        468
+      ]
+    },
+    {
+      "simple_id": 6,
+      "category": "仪表",
+      "bbox": [
+        370,
+        682,
+        410,
+        720
+      ]
+    },
+    {
+      "simple_id": 7,
+      "category": "属性标签",
+      "bbox": [
+        309,
+        573,
+        329,
+        627
+      ]
+    },
+    {
+      "simple_id": 8,
+      "category": "符号",
+      "bbox": [
+        271,
+        565,
+        307,
+        638
+      ]
+    }
+  ],
+  "answer": {
+    "target_ids": [
+      2,
+      3
+    ]
+  }
+}

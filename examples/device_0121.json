@@ -1,0 +1,92 @@
+{
+  "image": "device_0121.jpg",
+  "source_folder": "10个项目_项目2_PSR15-73 四川天明_系统图_天明电厂03--精处理系统系统 - 酸碱",
+  "crop_type": "device",
+  "main_element": {
+    "simple_id": 1,
+    "category": "设备",
+    "bbox": [
+      396,
+      359,
+      629,
+      666
+    ]
+  },
+  "candidate_elements": [
+    {
+      "simple_id": 2,
+      "category": "属性标签",
+      "bbox": [
+        458,
+        484,
+        523,
+        506
+      ]
+    },
+    {
+      "simple_id": 3,
+      "category": "位号",
+      "bbox": [
+        443,
+        521,
+        552,
+        597
+      ]
+    },
+    {
+      "simple_id": 4,
+      "category": "位号",
+      "bbox": [
+        589,
+        662,
+        686,
+        735
+      ]
+    },
+    {
+      "simple_id": 5,
+      "category": "位号",
+      "bbox": [
+        475,
+        284,
+        573,
+        357
+      ]
+    },
+    {
+      "simple_id": 6,
+      "category": "符号",
+      "bbox": [
+        530,
+        673,
+        558,
+        717
+      ]
+    },
+    {
+      "simple_id": 7,
+      "category": "符号",
+      "bbox": [
+        437,
+        673,
+        464,
+        714
+      ]
+    },
+    {
+      "simple_id": 8,
+      "category": "位号",
+      "bbox": [
+        300,
+        612,
+        388,
+        675
+      ]
+    }
+  ],
+  "answer": {
+    "target_ids": [
+      3
+    ]
+  }
+}

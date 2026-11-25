@@ -1,0 +1,56 @@
+# ==================== Python ====================
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# ==================== 原始数据（不要上传） ====================
+小训练集/
+
+# ==================== 切片数据（不要上传，示例见 examples/） ====================
+processed_data/
+processed_data_test/
+processed_data_train_small/
+
+# ==================== 评估结果 / 中间产物 ====================
+模型评估结果/
+
+# ==================== KNN vs Qwen 对比实验数据 ====================
+compare_knn_qwen/测试集/
+compare_knn_qwen/测试集_统一GT/
+compare_knn_qwen/intermediate_files/
+compare_knn_qwen/results/
+
+# ==================== 推理服务测试数据 ====================
+app/test_data/
+
+# ==================== 训练输出 / 模型权重 / checkpoint ====================
+output/
+output_all_tag/
+output_*/
+checkpoint*/
+final/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# ==================== 日志 / 临时文件 ====================
+*.log
+*.jsonl
+training_log*
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db

@@ -1,0 +1,74 @@
+# Qwen2.5-VL 推理接口配置
+
+# ==================== 模型配置 ====================
+model:
+  # LoRA权重路径（微调后的模型，即训练输出的output/final）
+  # 例如："/home/ubuntu/qwen_train/output_7b_merge/final"
+#  model_path: "/home/ubuntu/qwen_train/app/final"
+  model_path: "/mnt/nvme/qwen_train/app/final"
+
+  # 基础模型路径（必填，用于加载基础模型和processor）
+  # 例如："/home/ubuntu/model/Qwen2.5-VL-7B-Instruct"
+  base_model_path: "/mnt/nvme/model/Qwen2.5-VL-7B-Instruct"
+  
+  # GPU设置（null则使用device_map="auto"自动分配到所有可用GPU）
+  device: "7"
+  
+  # vLLM服务配置
+  vllm_base_url: "http://localhost:5003/v1"  # vLLM服务地址
+  vllm_model_name: "qwen-relation"  # vLLM服务的模型名称
+  
+  # 推理参数（与evaluate.py保持一致）
+  max_new_tokens: 16  # ID列表不需要太长，16足够输出 "2, 3, 4"
+  temperature: 0.0    # 贪婪解码（do_sample=False）
+  top_p: 1.0
+
+# ==================== 图片处理配置 ====================
+image:
+  # 最大图片尺寸
+  max_size: 1024
+  
+  # 裁剪尺寸（用于主体元件）
+  crop_size: 1024
+  
+  # 候选元件最大数量（与预处理保持一致，preprocess默认7）
+  max_candidates: 7
+
+# ==================== 关联关系配置 ====================
+association:
+  # 默认置信度（如果模型未输出）
+  default_confidence: 0.9
+  
+  # 类别映射（接口格式 → 训练格式）
+  category_map:
+    "设备": "device"
+    "符号": "symbol"
+    "仪表": "instrument"
+    "位号": "tag"
+    "设备序号": "device_number"
+    "属性标签": "label"
+  
+  # 反向映射（训练格式 → 接口格式）
+  category_reverse_map:
+    "device": "设备"
+    "symbol": "符号"
+    "instrument": "仪表"
+    "tag": "位号"
+    "device_number": "设备序号"
+    "label": "属性标签"
+  
+  # 关联类型映射
+  relation_type_map:
+    "设备-设备序号": "device-number"
+    "设备-位号": "device-tag"
+    "符号-位号": "symbol-tag"
+    "符号-属性标签": "symbol-attr"
+    "仪表-位号": "instrument-tag"
+
+# ==================== Flask配置 ====================
+flask:
+  host: "0.0.0.0"
+  port: 5004
+  debug: false
+  max_content_length: 100  # MB
+

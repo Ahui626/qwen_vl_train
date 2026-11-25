@@ -1,0 +1,113 @@
+# Qwen2.5-VL 关联关系训练配置
+
+# ==================== 路径配置 ====================
+paths:
+  # 数据相关路径
+  raw_data_dir: "关联标注审核后-2026-01-15"      # 原始数据目录
+  processed_data_dir: "processed_data_train_tag"          # 预处理后的数据目录
+  test_data_dir: "processed_data_test_tag"
+  # 测试集目录（可选）为空则使用验证集评估
+  
+  # 训练输出路径
+  output_dir: "output_all_tag"                            # 训练输出根目录
+  final_model_subdir: "final"                     # 最终模型子目录名
+  checkpoint_prefix: "checkpoint"                 # checkpoint目录前缀
+  
+  # 日志文件
+  training_log: "training_log.jsonl"              # 训练日志文件名
+  
+  # 可视化输出文件
+  training_curves: "training_curves.png"          # 训练曲线图
+  loss_comparison: "loss_comparison.png"          # 损失对比图
+  training_report: "training_report.txt"          # 训练报告
+  
+  # 评估输出文件
+  evaluation_metrics: "evaluation_metrics.png"    # 评估指标图
+  evaluation_results: "evaluation_results.json"   # 评估结果JSON
+  samples_index: "samples_index.json"             # 样本索引文件
+
+# ==================== 数据预处理配置 ====================
+preprocess:
+  # 注意：数据路径已迁移到 paths 配置节
+  
+  # 滑动窗口配置
+  window:
+    width: 1024    # 窗口宽度（像素）
+    height: 1024   # 窗口高度（像素）
+    overlap: 0.3   # 重合率 (0-1)，0.3 表示 30% 重叠
+  
+  # 只保留这些类别的元件（其他类别不框出）
+  valid_categories:
+    - "设备"
+    - "设备序号"
+    - "仪表"
+    - "符号"
+    - "位号"
+    - "属性标签"
+  
+  # 元件框绘制颜色 (RGB)
+  colors:
+    设备: [255, 0, 0]      # 红色
+    仪表: [0, 255, 0]      # 绿色
+    符号: [0, 0, 255]      # 蓝色
+    属性标签: [255, 165, 0] # 橙色
+    设备序号: [128, 0, 128] # 紫色
+    位号: [255, 255, 0]    # 黄色
+    其他: [128, 128, 128]  # 灰色
+  
+  # 边框线宽
+  box_line_width: 3
+  
+  # ID标注字体大小
+  font_size: 18
+  
+  # 设备类裁剪边距（像素）
+  # 动态裁剪设备及其关联元件时，在边界外额外添加的边距
+  device_padding: 50
+  
+  # 关联关系类型（训练时使用）
+  relation_types:
+    - "设备序号"   # 设备 - 设备序号
+    - "位号"       # 设备/仪表/符号 - 位号
+    - "公称直径"   # 符号 - 属性标签
+
+# ==================== 模型配置 ====================
+model:
+#  name: "/home/ubuntu/model/Qwen2.5-VL-3B-Instruct"
+#  name: "/home/ubuntu/cal_llm_test/test/models/Qwen2.5-VL-3B-Instruct"
+#  name: "/data/storage2/qwen/Qwen2.5-VL-7B-Instruct"
+  name: "/home/ubuntu/model/Qwen2.5-VL-7B-Instruct"
+
+# ==================== 训练配置 ====================
+training:
+  # 注意：数据和输出路径已迁移到 paths 配置节
+  test_set_size: 100  # 评估时使用的测试集样本数量
+  num_epochs: 10
+  batch_size: 1  # 单卡训练：降低batch避免训练初期OOM
+  gradient_accumulation_steps: 16  # 实际batch = 1 × 16 = 16（保持训练效果）
+  learning_rate: 1.0e-4
+  warmup_ratio: 0.05
+  weight_decay: 0.05
+  max_grad_norm: 1.0
+  logging_steps: 20
+  save_steps: 100
+  eval_steps: 100
+  save_total_limit: 5
+  train_ratio: 0.9  # 训练集比例
+
+# ==================== LoRA 配置 ====================
+lora:
+  enabled: true
+  r: 8
+  alpha: 16
+  dropout: 0.1          # ↑ 微增dropout（防过拟合）
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "out_proj"
+    - "down_proj"
+
+# ==================== GPU 配置 ====================
+gpu:
+  visible_devices: "3,4"
